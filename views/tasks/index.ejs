@@ -1,0 +1,25 @@
+<%-include ../shared/header %>
+<!-- <p>Dashboard works!</p> -->
+<div class="row mt-4">
+    <div class="offset-md-2 col-md-8">
+        <h1>Task Items</h1>
+        <hr />
+        <ul class="list-group">
+            <% for(var i=0; i<taskItems.length; i++) { %>
+                <% if(taskItems[i].completed) { %>
+                    <li class="list-group-item list-group-item-light" style="text-decoration: line-through">
+                <% } else { %>
+                    <li class="list-group-item">
+                <% } %>
+                        <%=taskItems[i].title%>
+                        <a href="/tasks/delete/<%=taskItems[i]._id%>" class="btn btn-danger btn-sn float-right">Delete</a>
+                        <a href="/tasks/status/<%=taskItems[i]._id%>" class="btn <%=taskItems[i].completed? 'btn-info':'btn-success'%> btn-sn float-right mr-1">
+                            <%=taskItems[i].completed? "Undo":"Complete"%>
+                        </a>
+                    </li>
+            <% } %>
+        </ul>
+    </div>
+
+</div>
+<%-include ../shared/footer %>
