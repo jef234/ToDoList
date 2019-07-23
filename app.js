@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
-    res.redirect("/dashboard");
+    res.redirect("/login");
 });
 app.use("/", authRouter);
 app.use("/tasks", taskRouter);

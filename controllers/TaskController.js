@@ -4,7 +4,8 @@ exports.getTasks = function (req, res) {
     // res.send("Task list works!");
     Task.find().then(function (tasks) {
         res.render("tasks/index", {
-            taskItems: tasks
+            taskItems: tasks,
+            user: req.session.user
         });
     });
 }
@@ -24,7 +25,8 @@ exports.addTask = function (req, res) {
     let error = req.session.errorMsg;
     req.session.errorMsg = "";
     res.render("tasks/add", {
-        errorMsg: error
+        errorMsg: error,
+        user: req.session.user
     });
 }
 

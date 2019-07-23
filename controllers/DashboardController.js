@@ -29,6 +29,7 @@ exports.displaytTasksCount = function (req, res) {
     res.render("dashboard/index", {
         toDoTasks: toDoTasks,
         totalTasks: totalTasks,
-        completedTasks: completedTasks        
+        completedTasks: completedTasks,
+        user: req.session.user        
     });
 }

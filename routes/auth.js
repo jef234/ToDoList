@@ -1,5 +1,5 @@
-let router = require("express").Router();
-let AuthController = require("../controllers/AuthController");
+let router = require("express").Router(),
+    AuthController = require("../controllers/AuthController");
 
 router.get("/login", AuthController.loginForm);
 router.post("/login", [AuthController.loginFormValidator, AuthController.login]);

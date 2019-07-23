@@ -1,6 +1,9 @@
 let express = require("express"),
     TaskConstroller = require("../controllers/TaskController"),
-    router = express.Router();
+    router = express.Router(),
+    AuthController = require("../controllers/AuthController");
+
+router.use(AuthController.authMiddleware);
 
 router.get("/", TaskConstroller.getTasks);
 // res.render("tasks/index");
