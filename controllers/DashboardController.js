@@ -6,22 +6,22 @@ let Task = require("../models/Task"),
 exports.getTotalTasks = function (req, res, next) {
     Task.find().count().then(function (count) {
         totalTasks = count;
+        next();
     });
-    next();
 }
 
 exports.getCompletedTasks = function (req, res, next) {
     Task.find({ completed: true }).count().then(function (count) {
         completedTasks = count;
+        next();
     });
-    next();
 }
 
 exports.getToDoTasks = function (req, res, next) {
     Task.find({ completed: false }).count().then(function (count) {
         toDoTasks = count;
+        next();
     });
-    next();
 }
 
 exports.displaytTasksCount = function (req, res) {
