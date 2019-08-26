@@ -3,10 +3,13 @@ let User = require("../models/User"),
 
 exports.loginForm = function (req, res) {
     // res.send("Login Works");
-    let error = req.session.errorMsg;
+    let error = req.session.errorMsg,
+        success = req.session.successMsg;
     req.session.errorMsg = "";
+    req.session.successMsg = "";
     res.render("auth/login", {
-        errorMsg: error
+        errorMsg: error,
+        successMsg: success
     });
 }
 
