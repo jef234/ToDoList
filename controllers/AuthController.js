@@ -34,11 +34,25 @@ exports.login = function (req, res) {
 }
 
 exports.registerForm = function (req, res) {
-    res.send("Register Form Works");
+    // res.send("Register Form Works");
+    res.render("auth/register")
 }
 
 exports.register = function (req, res) {
-    res.send("Register Process Works");
+    // res.send("Register Process Works");
+    const { password } = req.body,
+        salt = bcrypt.genSaltSync(10),
+        passwordHash = bcrypt.hashSync(password, salt)
+
+    let user = new User(req.body)
+    user.passwordHash = passwordHash
+
+    user.save().then(() => {
+        req.session.successMsg = user.username + " is now registered. Login to continue";
+        res.redirect("/login")
+    }).catch((err) => {
+        console.log(err)
+    })
 }
 
 exports.logout = function (req, res) {
@@ -52,10 +66,10 @@ exports.loginFormValidator = function (req, res, next) {
 
 exports.registerFormValidator = function (req, res, next) {
     next();
-} 
+}
 
 exports.authMiddleware = function (req, res, next) {
-    if(typeof req.session.user === "undefined") {
+    if (typeof req.session.user === "undefined") {
         res.redirect("/login");
     } else {
         next();
